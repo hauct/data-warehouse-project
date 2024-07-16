@@ -29,7 +29,7 @@ WITH dim_supplier__source AS (
   UNION ALL
   SELECT
     -1 AS supplier_key,
-    'Error' AS supplier_name
+    'Invalid' AS supplier_name
 )
 
 SELECT
