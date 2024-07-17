@@ -9,6 +9,8 @@ WITH dim_product__source AS (
     stock_item_name AS product_name,
     brand AS brand_name,
     is_chiller_stock,
+    unit_package_id AS unit_package_key,
+    outer_package_id AS outer_package_key,
     supplier_id AS supplier_key
   FROM dim_product__source
 )
@@ -19,6 +21,8 @@ WITH dim_product__source AS (
     CAST(product_name AS STRING) AS product_name,
     CAST(brand_name AS STRING) AS brand_name,
     CAST(is_chiller_stock AS BOOLEAN) AS is_chiller_stock_boolean,
+    CAST(unit_package_key AS INTEGER)  AS unit_package_key,
+    CAST(outer_package_key AS INTEGER)  AS outer_package_key,
     CAST(supplier_key AS INTEGER)  AS supplier_key,
   FROM dim_product__rename_column
  )
@@ -34,6 +38,8 @@ WITH dim_product__source AS (
       WHEN is_chiller_stock_boolean IS NULL THEN 'Undefined'
       ELSE 'Invalid' END
     AS is_chiller_stock,
+    unit_package_key,
+    outer_package_key,
     supplier_key
   FROM dim_product__cast_type
  )
@@ -44,6 +50,8 @@ WITH dim_product__source AS (
     product_name,
     brand_name,
     is_chiller_stock,
+    unit_package_key,
+    outer_package_key,
     supplier_key
   FROM dim_product__convert_boolean
   UNION ALL
@@ -52,6 +60,8 @@ WITH dim_product__source AS (
     'Undefined' AS product_name,
     'Undefined' AS brand_name,
     'Undefined' AS is_chiller_stock,
+    0 AS unit_package_key,
+    0 AS outer_package_key,
     0 AS supplier_key
   UNION ALL
   SELECT
@@ -59,14 +69,20 @@ WITH dim_product__source AS (
     'Invalid' AS product_name,
     'Invalid' AS brand_name,
     'Invalid' AS is_chiller_stock,
+    -1 AS unit_package_key,
+    -1 AS outer_package_key,
     -1 AS supplier_key
 )
 
 SELECT
   dim_product.product_key,
   dim_product.product_name,
-  COALESCE(dim_product.brand_name, 'Undefined') AS brand_name,
+  dim_product.brand_name,
   dim_product.is_chiller_stock,
+  dim_product.unit_package_key,
+  COALESCE(dim_unit_package.package_type_name, 'Invalid') AS unit_package_name
+  dim_product.outer_package_key,
+  COALESCE(dim_package_type.package_type_name, 'Invalid') AS unit_package_name
   dim_product.supplier_key,
   COALESCE(dim_supplier.supplier_name, 'Invalid') AS supplier_name
 FROM dim_product__convert_boolean AS dim_product
