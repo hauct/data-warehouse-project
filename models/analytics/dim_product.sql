@@ -80,11 +80,15 @@ SELECT
   dim_product.brand_name,
   dim_product.is_chiller_stock,
   dim_product.unit_package_key,
-  COALESCE(dim_unit_package.package_type_name, 'Invalid') AS unit_package_name
+  COALESCE(dim_unit_package.package_type_name, 'Invalid') AS unit_package_name,
   dim_product.outer_package_key,
-  COALESCE(dim_package_type.package_type_name, 'Invalid') AS unit_package_name
+  COALESCE(dim_package_type.package_type_name, 'Invalid') AS outer_package_name,
   dim_product.supplier_key,
   COALESCE(dim_supplier.supplier_name, 'Invalid') AS supplier_name
 FROM dim_product__convert_boolean AS dim_product
+LEFT JOIN {{ ref('stg_dim_package_type')}} AS dim_unit_package
+ON dim_product.unit_package_key = dim_unit_package.package_type_key
+LEFT JOIN {{ ref('stg_dim_package_type')}} AS dim_package_type
+ON dim_product.outer_package_key = dim_package_type.package_type_key
 LEFT JOIN {{ ref('dim_supplier')}} AS dim_supplier
 ON dim_product.supplier_key = dim_supplier.supplier_key

@@ -1,6 +1,6 @@
 WITH dim_state_province__source AS (
   SELECT *
-  FROM `vit-lam-data.wide_world_importers.application__states_provinces`
+  FROM `vit-lam-data.wide_world_importers.application__state_provinces`
 )
 
 , dim_state_province_rename_column AS (

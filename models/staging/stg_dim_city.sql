@@ -41,8 +41,8 @@ SELECT
   dim_city.city_key,
   dim_city.city_name,
   dim_city.state_province_key,
-  COALESCE(state_province.state_province_name, 'Invalid') AS state_province_name
+  COALESCE(dim_state_province.state_province_name, 'Invalid') AS state_province_name
 FROM dim_city__add_undefined_record AS dim_city
-LEFT JOIN {{ ref('stg_dim_state_province')}} AS state_province
-ON dim_city.state_province_key = dim_supplier.state_province_key
+LEFT JOIN {{ ref('stg_dim_state_province')}} AS dim_state_province
+ON dim_city.state_province_key = dim_state_province.state_province_key
 
