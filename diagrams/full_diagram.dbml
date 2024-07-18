@@ -1,0 +1,107 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table dim_customer {
+  customer_key integer [pk]
+  customer_name text
+  is_statement_sent text 
+  is_on_credit_hold text
+  credit_limit numeric
+  standard_discount_percentage numeric
+  payments_days integer
+  account_opened_date date
+  customer_category_key integer [ref: > dim_customer_categories.customer_category_key]
+  buying_group_key integer [ref: > dim_buying_group.buying_group_key]
+  delivery_method_key integer [ref: > dim_delivery_method.delivery_method_key]
+  delivery_city_key integer [ref: > dim_city.city_key]
+  postal_city_key integer  [ref: > dim_city.city_key]
+  primary_contact_person_key integer [ref: > dim_person.person_key]
+  alternate_contact_person_key integer [ref: > dim_person.person_key]
+  bill_to_customer_key integer [ref: > dim_customer.customer_key]
+}
+
+Table dim_customer_categories {
+  customer_category_key integer [pk]
+  customer_category_name text
+}
+
+Table dim_buying_group {
+  buying_group_key integer [pk]
+  buying_group_name text
+}
+
+
+Table dim_city {
+  city_key integer [pk]
+  city_name text
+  state_province_key integer  [ref: > dim_state_province.state_province_key]
+  state_province_name text
+}
+
+Table dim_state_province {
+  state_province_key integer [pk]
+  state_province_name text
+}
+
+Table dim_person {
+  person_key integer [pk]
+  full_name text
+  preferred_name text
+  search_name text
+  is_employee text
+  is_salesperson text
+}
+
+Table dim_product {
+  product_key integer [pk]
+  product_name text
+  brand_name text
+  is_chiller_stock text
+  unit_package_type_key integer [ref: > dim_package_type.package_type_key]
+  outer_package_type_key integer [ref: > dim_package_type.package_type_key]
+  supplier_key integer [ref: > dim_supplier.supplier_key]
+}
+
+
+Table dim_supplier {
+  supplier_key integer [pk]
+  supplier_name text
+  supplier_category_key integer [ref: > dim_supplier_category.supplier_category_key]
+  delivery_method_key integer [ref: > dim_delivery_method.delivery_method_key]
+}
+
+Table dim_supplier_category {
+  supplier_category_key integer [pk]
+  supplier_category_name text
+}
+
+Table dim_delivery_method {
+  delivery_method_key integer [pk]
+  delivery_method_name text
+}
+
+
+Table dim_package_type {
+  package_type_key integer [pk]
+  package_type_name text
+}
+
+Table fact_sales_order_line {
+  sales_order_line_key integer [pk]
+  sales_order_key integer [ref: > fact_sales_order.sales_order_key]
+  product_key integer [ref: > dim_product.product_key]
+  quantity integer
+  unit_price numeric
+  tax_rate numeric
+  line_picking_completed_when date
+}
+
+Table fact_sales_order {
+  sales_order_key integer [pk]
+  customer_key integer [ref: > dim_customer.customer_key]
+  picked_by_person_key integer
+  is_undersupply_backordered text
+  expected_delivery_date date
+  picking_completed_when date
+  order_date date
+}

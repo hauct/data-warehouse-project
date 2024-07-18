@@ -1,0 +1,73 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table dim_customer {
+  customer_key integer [pk]
+  customer_name text
+  is_statement_sent text 
+  is_on_credit_hold text
+  credit_limit numeric
+  standard_discount_percentage numeric
+  payments_days integer
+  account_opened_date date
+  customer_category_key integer
+  customer_category_name text
+  buying_group_key integer
+  buying_group_name text
+  delivery_method_key integer
+  delivery_method_name text
+  delivery_city_key integer
+  delivery_city_name text
+  delivery_state_province_key integer
+  delivery_state_province_name text
+  postal_city_key integer
+  postal_city_name text
+  postal_state_province_key integer
+  postal_state_province_name text
+  primary_contact_person_key integer
+  primary_contact_person_name text
+  alternate_contact_person_key integer
+  alternate_contact_person_name text
+  bill_to_customer_key integer
+  bill_to_customer_name text
+}
+
+Table dim_product {
+  product_key integer [pk]
+  product_name text
+  brand_name text
+  is_chiller_stock text
+  unit_package_type_key integer
+  unit_package_type_name text
+  outer_package_type_key integer
+  outer_package_type_name text
+  supplier_key integer  [ref: > dim_supplier.supplier_key]
+}
+
+
+Table dim_supplier {
+  supplier_key integer [pk]
+  supplier_name text
+  supplier_category_key integer
+  supplier_category_name text
+  delivery_method_key integer
+  delivery_method_name text
+}
+
+Table fact_sales_order_line {
+  sales_order_line_key integer [pk]
+  sales_order_key integer
+  product_key integer [ref: > dim_product.product_key]
+  customer_key integer [ref: > dim_customer.customer_key]
+  picked_by_person_key integer
+  is_undersupply_backordered text
+  quantity integer
+  unit_price numeric
+  tax_rate numeric
+  gross_amount numeric
+  tax_amount numeric
+  expected_delivery_date date
+  order_date date
+  line_picking_completed_when date
+  order_picking_completed_when date
+}
