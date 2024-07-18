@@ -10,6 +10,8 @@ WITH fact_sales_order_lines__source AS (
     stock_item_id AS product_key,
     quantity,
     unit_price,
+    tax_rate,
+    picking_completed_when
   FROM fact_sales_order_lines__source
 )
 
@@ -19,14 +21,22 @@ WITH fact_sales_order_lines__source AS (
     CAST(sales_order_key AS INTEGER) AS sales_order_key,
     CAST(product_key AS INTEGER) AS product_key,
     CAST(quantity AS INTEGER) AS quantity,
-    CAST(unit_price AS NUMERIC) AS unit_price
+    CAST(unit_price AS NUMERIC) AS unit_price,
+    CAST(tax_rate AS NUMERIC) AS tax_rate,
+    CAST(picking_completed_when AS DATE) AS picking_completed_when
   FROM fact_sales_order_lines__rename_column
 )
 
 , fact_sales_order_lines__calculate_measure AS (
   SELECT 
-    *,
-    quantity * unit_price AS gross_amount
+    sales_order_line_key,
+    sales_order_key,
+    product_key,
+    quantity,
+    unit_price,
+    quantity * unit_price AS gross_amount,
+    tax_rate * quantity * unit_price AS tax_amount
+    picking_completed_when,
   FROM fact_sales__order_lines__cast_type
 )
 
