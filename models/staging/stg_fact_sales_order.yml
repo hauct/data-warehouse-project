@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_fact_sales_order
+    columns:
+      - name: sales_order_key
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_key
+        data_tests:
+          - not_null
+      - name: is_undersupply_backordered
+        data_tests:
+          - not_null
+      - name: expected_delivery_date
+        data_tests:
+          - not_null
+      - name: order_date
+        data_tests:
+          - not_null

@@ -16,15 +16,27 @@ models:
       - name: unit_package_key
         data_tests:
           - not_null
+          - relationships:
+              to: ref('stg_dim_package_type')
+              field: package_type_key
       - name: unit_package_name
         data_tests:
           - not_null
+      - name: outer_package_key
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_dim_package_type')
+              field: package_type_key
       - name: outer_package_name
         data_tests:
           - not_null
       - name: supplier_key
         data_tests:
           - not_null
+          - relationships:
+              to: ref('dim_supplier')
+              field: supplier_key
       - name: supplier_name
         data_tests:
           - not_null

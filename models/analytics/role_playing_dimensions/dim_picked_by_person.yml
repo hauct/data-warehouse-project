@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: dim_picked_by_person
+    columns:
+      - name: pickedbyperson_person_key
+        data_tests:
+          - unique
+          - not_null
+      - name: pickedbyperson_person_name
+        data_tests:
+          - not_null
+      - name: pickedbyperson_search_name
+        data_tests:
+          - not_null
+      - name: is_employee
+        data_tests:
+          - not_null

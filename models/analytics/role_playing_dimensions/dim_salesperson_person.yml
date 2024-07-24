@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: dim_salesperson_person
+    columns:
+      - name: salesperson_person_key
+        data_tests:
+          - unique
+          - not_null
+      - name: salesperson_person_name
+        data_tests:
+          - not_null
+      - name: salesperson_search_name
+        data_tests:
+          - not_null

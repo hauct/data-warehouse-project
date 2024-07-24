@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_dim_supplier_category
+    columns:
+      - name: supplier_category_key
+        data_tests:
+          - unique
+          - not_null
+      - name: supplier_category_name
+        data_tests:
+          - not_null

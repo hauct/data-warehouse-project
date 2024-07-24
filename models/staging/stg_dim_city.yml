@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_dim_city
+    columns:
+      - name: city_key
+        data_tests:
+          - unique
+          - not_null
+      - name: city_name
+        data_tests:
+          - not_null
+      - name: state_province_key
+        data_tests:
+          - not_null
+      - name: state_province_name
+        data_tests:
+          - not_null

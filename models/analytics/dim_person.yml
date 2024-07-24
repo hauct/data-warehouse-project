@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_person
+    columns:
+      - name: person_key
+        data_tests:
+          - unique
+          - not_null
+      - name: full_name
+        data_tests:
+          - not_null
+      - name: search_name
+        data_tests:
+          - not_null
+      - name: is_employee
+        data_tests:
+          - not_null
+      - name: is_salesperson
+        data_tests:
+          - not_null

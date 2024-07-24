@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: dim_sales_order_line_indicator
+    columns:
+      - name: sales_order_line_indicator_key
+        data_tests:
+          - unique
+          - not_null
+      - name: is_undersupply_backordered_boolean
+        data_tests:
+          - not_null
+      - name: package_type_name
+        data_tests:
+          - not_null

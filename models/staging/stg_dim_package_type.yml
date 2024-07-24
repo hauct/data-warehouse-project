@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_dim_package_type
+    columns:
+      - name: package_type_key
+        data_tests:
+          - unique
+          - not_null
+      - name: package_type_name
+        data_tests:
+          - not_null

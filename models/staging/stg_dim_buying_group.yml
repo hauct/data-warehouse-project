@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_dim_buying_group
+    columns:
+      - name: buying_group_key
+        data_tests:
+          - unique
+          - not_null
+      - name: buying_group_name
+        data_tests:
+          - not_null

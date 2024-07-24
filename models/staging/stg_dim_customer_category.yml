@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_dim_customer_category
+    columns:
+      - name: customer_category_key
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_category_name
+        data_tests:
+          - not_null

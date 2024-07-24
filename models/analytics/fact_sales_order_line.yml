@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: fact_sales_order_line
+    columns:
+      - name: sales_order_line_key
+        data_tests:
+          - unique
+          - not_null
+      - name: sales_order_line_indicator_key
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sales_order_line_indicator')
+              field: sales_order_line_indicator_key
