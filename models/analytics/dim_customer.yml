@@ -13,9 +13,13 @@ models:
       - name: is_statement_sent
         data_tests:
           - not_null
+          - accepted_values:
+              values: ['Statement Sent', 'Not Statement Sent', 'Undefined', 'Invalid']
       - name: is_on_credit_hold
         data_tests:
           - not_null
+          - accepted_values:
+              values: ['On Credit Hold', 'Not On Credit Hold', 'Undefined', 'Invalid']
       - name: credit_limit
       - name: standard_discount_percentage
         data_tests:

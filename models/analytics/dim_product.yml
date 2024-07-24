@@ -13,6 +13,8 @@ models:
       - name: is_chiller_stock
         data_tests:
           - not_null
+          - accepted_values:
+              values: ['Chilled Stock', 'Not Chilled Stock', 'Undefined', 'Invalid']
       - name: unit_package_key
         data_tests:
           - not_null

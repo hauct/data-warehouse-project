@@ -10,6 +10,11 @@ models:
       - name: is_undersupply_backordered_boolean
         data_tests:
           - not_null
+      - name: is_undersupply_backordered
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Undersupply Backordered', 'Not Undersupply Backordered']
       - name: package_type_name
         data_tests:
           - not_null
