@@ -1,6 +1,6 @@
-# {your_name} Data Warehouse Project
+# Hauct - Data Warehouse Project
 
-Hello! I'm {your_name}, and this is my project to show my data warehouse skills.
+Hello! I'm Hau, and this is my project to show my data warehouse skills.
 
 ## 🎯 Knowledge & techniques that I achieved
 
@@ -14,12 +14,11 @@ You can find the diagrams at [`diagrams`](diagrams).
 
 You can find data models at [`models/analytics`](models/analytics).
 
-You can find data quality tests inside the `yml` files at [`models/analytics`](models/analytics).
+You can find data quality tests inside the `yml` files at [`models/test`](models/test).
 
 ## Modules that I implemented
 
 - Sales Orders
-- Purchase Orders
 
 ## More info
 - Raw dataset: [Wide World Importers](https://learn.microsoft.com/en-us/sql/samples/wide-world-importers-what-is?view=sql-server-ver16)
